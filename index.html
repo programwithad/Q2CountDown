@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz 2 Countdown</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #121212;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            flex-direction: column;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        #countdown {
+            font-size: 3rem;
+            font-weight: 600;
+            background: #1e90ff;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+<h1>Countdown to Quiz 2 Exam</h1>
+<div id="countdown"></div>
+
+<script>
+    function updateCountdown() {
+        const targetDate = new Date("2025-03-16"); // Quiz 2 Exam Date
+        const now = new Date();
+        const difference = targetDate - now;
+
+        if (difference <= 0) {
+            document.getElementById("countdown").innerHTML = "🚨 Today is Quiz 2 Exam!";
+            clearInterval(timer);
+            return;
+        }
+
+        const remainingDays = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const remainingHours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const remainingMinutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const remainingSeconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML = `${remainingDays}d ${remainingHours}h ${remainingMinutes}m ${remainingSeconds}s`;
+    }
+
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>
+</body>
+</html>
